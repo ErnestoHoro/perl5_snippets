@@ -39,15 +39,13 @@ sub hash_to_matrix {
         foreach my $k (sort (keys(%_hash))) {
             my $v = $_hash{$k};
 
+            $matrix[$rows][$col] = $k;
+
             if (ref($v) eq 'HASH') {
-                $matrix[$rows][$col] = $k;
-
                 $cols += 1;
-
                 _hash_to_matrix(%{$v});
             }
             else {
-                $matrix[$rows][$col] = $k;
                 $matrix[$rows][$col + 1] = $v;
 
                 my $cols_last = $col + 2;
