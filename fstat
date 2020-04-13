@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+
+use POSIX qw(strftime nice);
+use Time::HiRes qw(time stat);
+
+my @file_stat = stat($file_path);
+my $time = $file_stat[9];
+
+my $date_time = strftime("%y%m%d_%H%M%S", localtime($time));
+my $date_time_hr = strftime("%y-%m-%d %H:%M:%S", localtime($time));  # milliseconds not supported by strftime()
+my $date_time_hr_ms = $date_time_hr . sprintf(".%03d", ($time - int($time)) * 1000);  # adding milliseconds
+my $user_id = getpwuid($file_stat[4]);
+my $file_size = $file_stat[7];
+my $file_size_mb = $file_stat[7] / 1000000;
