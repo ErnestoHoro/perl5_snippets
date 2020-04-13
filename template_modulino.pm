@@ -90,7 +90,7 @@ sub main {
         'arg-1' => undef,
     );
     $object->run();
-    my $result = $cinc_log->get_result();
+    my $result = $object->get_result();
 
 }
 
